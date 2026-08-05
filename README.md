@@ -68,13 +68,18 @@ Full documentation lives in the project **[Wiki](../../wiki)**:
 
 ```
 FANZi-IO-nity/
-├── .github/              # Issue templates & workflows
+├── .github/              # Issue templates & workflows (incl. wiki auto-sync)
 ├── assets/                # Branding assets (icons, images)
 ├── docs/                  # Additional project documentation
+├── wiki/                  # Source markdown for the GitHub Wiki (auto-synced on push)
 ├── CHANGELOG.md           # Version history
 ├── LICENSE                # Proprietary license terms
 └── README.md              # This file
 ```
+
+Wiki content is authored in [`wiki/`](wiki) and automatically published to the
+repository [Wiki](../../wiki) by the `.github/workflows/wiki-sync.yml` workflow
+whenever it changes on `main`.
 
 The application binary itself is distributed via [GitHub Releases](../../releases) rather than
 committed to source control (it exceeds GitHub's file size limits for regular commits).
