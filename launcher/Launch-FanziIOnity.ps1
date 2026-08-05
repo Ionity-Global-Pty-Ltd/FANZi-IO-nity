@@ -41,7 +41,8 @@ param(
     [switch]$NoUpdateCheck,
     [int]$MaxRestarts = 5,
     [int]$RestartWindowMinutes = 10,
-    [string]$GitHubRepo = "Ionity-Global-Pty-Ltd/FANZi-IO-nity"
+    [string]$GitHubRepo = "Ionity-Global-Pty-Ltd/FANZi-IO-nity",
+    [switch]$WebDashboard
 )
 
 $ErrorActionPreference = "Stop"
@@ -178,11 +179,60 @@ if ($existing) {
 }
 
 # ---------------------------------------------------------------------------
+# Pre-flight RGB & Hardware Sanitization
+# ---------------------------------------------------------------------------
+function Invoke-RgbPreflightSanitization {
+    Write-Log "Performing pre-flight RGB process & hardware environment checks..."
+
+    # 1. Terminate orphaned OpenRGB.exe helper processes to free up TCP port 6742 & hardware locks
+    $orphanedOpenRGB = Get-Process -Name "OpenRGB" -ErrorAction SilentlyContinue
+    if ($orphanedOpenRGB) {
+        Write-Log "Found $($orphanedOpenRGB.Count) orphaned OpenRGB process(es) (PIDs: $($orphanedOpenRGB.Id -join ', ')). Terminating to clear SDK port 6742..." "WARN"
+        foreach ($p in $orphanedOpenRGB) {
+            try {
+                Stop-Process -Id $p.Id -Force -ErrorAction SilentlyContinue
+            } catch {
+                Write-Log "Could not kill OpenRGB process $($p.Id): $($_.Exception.Message)" "WARN"
+            }
+        }
+        Start-Sleep -Milliseconds 500
+    }
+
+    # 2. Check for conflicting vendor RGB background services locking SMBus / I2C / USB controllers
+    $knownConflictingServices = @(
+        @{ Name = "LightingService";       Label = "ASUS Armoury Crate / Aura Sync" },
+        @{ Name = "iCUEService";           Label = "Corsair iCUE" },
+        @{ Name = "MSICenterService";      Label = "MSI Center / LightKeeper" },
+        @{ Name = "RGBFusion";             Label = "Gigabyte RGB Fusion" },
+        @{ Name = "Razer Synapse Service"; Label = "Razer Synapse" }
+    )
+
+    foreach ($svc in $knownConflictingServices) {
+        $found = Get-Service -Name $svc.Name -ErrorAction SilentlyContinue
+        if ($found -and $found.Status -eq 'Running') {
+            Write-Log "Conflicting vendor RGB service detected: '$($svc.Label)' ($($svc.Name)) is RUNNING. Hardware access / fan RGB sync may fail or conflict." "WARN"
+        }
+    }
+}
+
+# ---------------------------------------------------------------------------
 # Supervised launch loop
 # ---------------------------------------------------------------------------
 $restartTimestamps = New-Object System.Collections.Generic.List[DateTime]
 
 Write-Log "Starting FANZi IO-nity from '$ExePath'."
+
+Invoke-RgbPreflightSanitization
+
+if ($WebDashboard) {
+    $webPath = Join-Path (Get-Item $PSScriptRoot).Parent.FullName "web\index.html"
+    if (Test-Path $webPath) {
+        Write-Log "Opening FANZi IO-nity Web Control Dashboard at '$webPath'..."
+        Start-Process $webPath
+    } else {
+        Write-Log "Web dashboard not found at '$webPath'." "WARN"
+    }
+}
 
 while ($true) {
     $proc = Start-Process -FilePath $ExePath -PassThru
@@ -207,6 +257,7 @@ while ($true) {
 
     $restartTimestamps.Add((Get-Date))
     Write-Log "Restarting ($($restartTimestamps.Count)/$MaxRestarts in window)..."
+    Invoke-RgbPreflightSanitization
     Start-Sleep -Seconds 2
 }
 

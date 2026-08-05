@@ -17,7 +17,9 @@ predictive, self-tuning thermal management.
 
 - Powered by a bundled **OpenRGB** engine (runs as a background helper process,
   communicating with the main app over a local SDK connection)
-- Detects motherboard AURA/RGB headers, GPU, RAM, and supported peripheral controllers
+- Detects motherboard ARGB (ASUS AURA ARGB, MSI JRAINBOW, Gigabyte D_LED), GPU, RAM, ARGB fan hubs (Corsair Commander, Razer Chroma, Lian Li Uni Hub), and supported controllers
+- Multi-LED ARGB Fan Channel Sizing (customizable LED counts per header for 12–24 LED daisy-chained fans)
+- Automatic pre-flight process isolation & vendor service conflict detection via the companion launcher
 - Synchronize RGB lighting effects with live system state (temperature, load)
 - Multiple lighting modes per device (Direct, Static, Breathing, Flashing,
   Spectrum Cycle, Rainbow, Chase Fade, Chase, and more — availability depends on

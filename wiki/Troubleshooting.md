@@ -15,18 +15,27 @@
   sensor access. Close conflicting fan/RGB control apps and relaunch FANZi IO-nity.
 - Update your motherboard chipset/EC drivers.
 
-## RGB devices not syncing
+## RGB devices or Fan RGB not syncing / staying dark
 
-- Close other RGB control software (only one app can usually own a controller at a time
-  — FANZi IO-nity's bundled OpenRGB engine competes with tools like Aura Sync,
-  iCUE, Mystic Light, etc. for the same hardware).
-- Reconnect the device and restart FANZi IO-nity — this restarts the bundled
-  OpenRGB helper process (visible as a separate `OpenRGB.exe` process in Task Manager).
-- No visible lighting change? Confirm ARGB fans/strips are physically connected to
-  the motherboard's addressable header — onboard zones without connected ARGB
-  hardware will only expose 1–2 LEDs and won't produce a visible effect.
-- If a device isn't detected at all, confirm its RGB software (e.g. Aura Sync) isn't
-  running and locking the controller, then restart FANZi IO-nity.
+- **Fan LEDs partially lit or dark?** Addressable 5V 3-pin ARGB fans (ASUS AURA ARGB, MSI JRAINBOW, Gigabyte D_LED) require channel resizing in the RGB tab:
+  1. Select your motherboard / ARGB controller.
+  2. Locate the channel for your header (e.g., `Addressable 1`).
+  3. Change **LED Count** from the default (0–2) to match your physical fan setup (e.g. 3 fans × 12 LEDs = 36).
+  4. Click **Apply / Save Profile**.
+- **Conflicting vendor background services:** Close or disable proprietary RGB control background services that lock SMBus / I2C / USB controllers:
+  - ASUS: Stop `LightingService.exe` (Armoury Crate / Aura Sync)
+  - Corsair: Stop `iCUEService.exe` (iCUE)
+  - MSI: Stop `MSICenterService.exe` (MSI Center / LightKeeper)
+  - Gigabyte: Stop `RGBFusion.exe`
+  - Razer: Stop `Razer Synapse Service.exe`
+- **Orphaned helper processes / blocked port 6742:** Use the [`launcher/Launch-FanziIOnity.bat`](https://github.com/Ionity-Global-Pty-Ltd/FANZi-IO-nity/tree/main/launcher) companion script. The launcher automatically detects and terminates orphaned `OpenRGB.exe` processes before starting the app, preventing port 6742 socket collisions.
+- **Direct Mode requirement:** Set the device mode to `Direct` if you want real-time AI thermal synchronization or color animation.
+
+## Dedicated ARGB Fan Controllers (Corsair, Razer, Lian Li)
+
+- **Corsair Commander Core / PRO:** Ensure iCUE service is stopped. OpenRGB will detect individual channel ports once SMBus/USB is unlocked.
+- **Razer Chroma Addressable RGB Controller:** Supports up to 6 channels (up to 80 LEDs per channel, 120 total). Set channel counts per port in the RGB tab.
+- **Lian Li Uni Hub (SL / AL / TL):** Set mode to `Direct` and ensure the USB motherboard header connection is active.
 
 ## App crashes / closes unexpectedly
 

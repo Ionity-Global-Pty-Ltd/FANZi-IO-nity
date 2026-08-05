@@ -38,9 +38,10 @@ smart fan curve automation, RGB lighting sync, and full system health monitoring
 
 - 🤖 **AI Thermal Intelligence** — adaptive learning of thermal behavior to optimize cooling automatically
 - 🌀 **Smart Fan Control** — custom fan curves per sensor, per device, with automatic and manual modes
-- 🌈 **RGB Lighting** — synchronize lighting effects with system state and thermal load
+- 🌈 **RGB Lighting & ARGB Studio** — synchronize lighting effects with system state and thermal load, featuring customizable multi-LED ARGB fan channel sizing
+- 💻 **Web Control Dashboard** — state-of-the-art browser control panel for live telemetry, interactive canvas fan curve editing, and ARGB fan simulations
 - 📊 **System Health Monitoring** — live CPU, GPU, motherboard and storage telemetry
-- ⚙️ Powered by the **AEDi AI Engine** for predictive, self-tuning performance
+- ⚙️ Powered by the **AEDi AI Engine** by Johan Wilhelm van Antwerp (Antwerp Designs — [www.ionity.today](https://www.ionity.today))
 
 ## Installation
 
@@ -57,10 +58,10 @@ The [`launcher/`](launcher) folder provides `Launch-FanziIOnity.ps1` /
 `Launch-FanziIOnity.bat` — a resilient, source-available companion launcher that:
 
 - Self-elevates (no manual "Run as administrator")
-- Automatically checks GitHub Releases and updates your local exe when a newer
-  build is published
+- Performs pre-flight OpenRGB process sanitization (kills orphaned `OpenRGB.exe` processes to clear TCP port 6742)
+- Scans for conflicting vendor background services (`LightingService`, `iCUE`, `MSICenter`, `RGBFusion`, `Razer Synapse`)
+- Automatically checks GitHub Releases and updates your local exe when a newer build is published
 - Auto-restarts the app if it crashes unexpectedly, with a bounded retry budget
-  (mitigates a known historical crash-loop bug — see [CHANGELOG](CHANGELOG.md))
 - Logs every launch/update/crash/restart for troubleshooting
 
 See [`launcher/README.md`](launcher/README.md) for full usage.

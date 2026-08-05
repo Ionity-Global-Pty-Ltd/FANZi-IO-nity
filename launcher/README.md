@@ -17,6 +17,8 @@ more resilient day-to-day:
   latest [GitHub Release](https://github.com/Ionity-Global-Pty-Ltd/FANZi-IO-nity/releases)
   and downloads the newer build automatically (with an automatic `.bak` backup
   of the previous exe).
+- ✅ **RGB Pre-flight Sanitization** — automatically terminates orphaned `OpenRGB.exe` helper processes before launch to clear locked SDK socket `127.0.0.1:6742`.
+- ✅ **Vendor Service Conflict Detection** — scans for running vendor lighting background services (`LightingService`, `iCUE`, `MSICenter`, `RGBFusion`, `Razer Synapse`) that lock SMBus/I2C/USB controllers and cause fan RGB drops.
 - ✅ **Auto-restarts on crash** — if the app exits unexpectedly, the launcher
   relaunches it automatically, bounded by a restart budget so a crash-loop bug
   can't spin forever or hammer your machine.

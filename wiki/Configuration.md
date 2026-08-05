@@ -15,18 +15,19 @@ over its local SDK server (`127.0.0.1:6742`). No RGB effect is applied until you
 configure one — a fresh install starts with no active lighting profile.
 
 1. Open the **RGB** tab. On launch, FANZi IO-nity scans all detected controllers
-   (motherboard AURA/RGB headers, GPU, RAM, peripherals, etc.) via the OpenRGB engine.
+   (motherboard AURA/RGB headers, GPU, RAM, ARGB fan hubs, peripherals, etc.) via the OpenRGB engine.
 2. Select a connected RGB controller/device from the detected list.
-3. Choose a lighting **mode** (varies per device, e.g. `Direct`, `Static`, `Breathing`,
-   `Flashing`, `Spectrum Cycle`, `Rainbow`, `Chase Fade`, `Chase`) and a color.
-4. Optionally link the effect to a thermal or performance threshold.
-5. Save the profile — the selection is stored as `RgbState` on your active profile
-   in `settings.json` (see [Troubleshooting](Troubleshooting) for the file location).
+3. **Configure ARGB Fan LED Counts (Crucial Step for Fan RGB):**
+   - Motherboard ARGB 3-pin +5V headers (e.g. ASUS AURA ARGB, MSI JRAINBOW, Gigabyte D_LED) default to **0–2 LEDs** in generic hardware profiles.
+   - Click **Resize Channel / LED Count** for your target header (e.g. `Addressable 1`) and set the total number of LEDs connected.
+   - *Example:* If you have 3 daisy-chained ARGB fans with 12 LEDs each, set the header channel count to **36 LEDs**.
+   - If left at 1–2 LEDs, only the first LED near the hub will illuminate while the rest of your fans remain unlit.
+4. Choose a lighting **mode** (e.g. `Direct` for software-driven AI thermal sync, `Static`, `Breathing`, `Spectrum Cycle`, `Rainbow`, `Chase Fade`).
+5. Optionally link the effect to a thermal threshold (e.g. transition from Cyan → Amber → Red as GPU/CPU temperature rises).
+6. Save the profile — the selection is stored as `RgbState` on your active profile in `settings.json`.
 
-> **Note:** a motherboard's onboard AURA/RGB zone will report only a handful of LEDs
-> (sometimes just 1–2) until addressable ARGB fans or LED strips are physically
-> connected to its `Addressable` headers. If nothing visibly lights up, first check
-> that ARGB hardware is actually plugged into the header the effect targets.
+> [!TIP]
+> **Dedicated ARGB Hubs:** For Corsair Commander Core/PRO, Razer Chroma ARGB Hubs, or Lian Li Uni Hubs, ensure each individual channel/port is resized in the controller settings panel to match the physical fan LED specs.
 
 ## Monitoring Preferences
 
