@@ -31,3 +31,6 @@ files from its working directory. FANZi IO-nity does not modify system files.
 
 - See [Features](Features) for what you can do with FANZi IO-nity.
 - See [Configuration](Configuration) to set up fan curves, RGB profiles, and monitoring.
+- Consider using the [resilient launcher](https://github.com/Ionity-Global-Pty-Ltd/FANZi-IO-nity/tree/main/launcher)
+  instead of running the exe directly — it self-elevates, checks for updates, and
+  auto-restarts the app if it crashes.

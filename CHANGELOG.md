@@ -14,6 +14,28 @@ System Health Monitoring, powered by the AEDi AI Engine.
 - Component: `Fanzi.FanControl`
 - Build reference: `3d240445dffde758ba5c0382d4ffbe1d6b359592`
 
+## [Launcher 1.0.0] - 2026-08-05
+
+### Added
+- New [`launcher/`](launcher) companion tool (`Launch-FanziIOnity.ps1` /
+  `Launch-FanziIOnity.bat`), source-available, distributed alongside the
+  closed-source app:
+  - Self-elevates to administrator (required for hardware/RGB/fan access)
+  - Checks GitHub Releases for a newer build and self-updates the local exe
+  - Supervises the running process and automatically restarts it on
+    unexpected exit, bounded by a restart budget (default: 5 restarts / 10 min)
+  - Logs all launch/update/crash/restart events to
+    `%APPDATA%\FANZI\launcher-logs\`
+
+### Fixed / Mitigated
+- Verified and documented the RGB pipeline end-to-end (OpenRGB engine →
+  ASUS AURA controller); confirmed color control works correctly.
+- Mitigated the historical crash-loop pattern seen in local crash logs
+  (`UnobservedTaskException` / `SocketException (995)` around the OpenRGB SDK
+  connection, ~345 occurrences 2026-07-30 to 2026-08-01, none observed since)
+  — the launcher's supervised restart now recovers automatically from this
+  class of crash instead of leaving the app down.
+
 ---
 
 _For detailed release notes and prior versions, see the [Wiki → Changelog](../../wiki/Changelog)

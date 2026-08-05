@@ -51,6 +51,20 @@ smart fan curve automation, RGB lighting sync, and full system health monitoring
 > See the [Wiki → Installation](../../wiki/Installation) page for full setup instructions,
 > requirements, and troubleshooting steps.
 
+### Recommended: use the launcher
+
+The [`launcher/`](launcher) folder provides `Launch-FanziIOnity.ps1` /
+`Launch-FanziIOnity.bat` — a resilient, source-available companion launcher that:
+
+- Self-elevates (no manual "Run as administrator")
+- Automatically checks GitHub Releases and updates your local exe when a newer
+  build is published
+- Auto-restarts the app if it crashes unexpectedly, with a bounded retry budget
+  (mitigates a known historical crash-loop bug — see [CHANGELOG](CHANGELOG.md))
+- Logs every launch/update/crash/restart for troubleshooting
+
+See [`launcher/README.md`](launcher/README.md) for full usage.
+
 ## Documentation
 
 Full documentation lives in the project **[Wiki](../../wiki)**:
@@ -71,6 +85,7 @@ FANZi-IO-nity/
 ├── .github/              # Issue templates & workflows (incl. wiki auto-sync)
 ├── assets/                # Branding assets (icons, images)
 ├── docs/                  # Additional project documentation
+├── launcher/              # Resilient launcher/updater companion tool (source-available)
 ├── wiki/                  # Source markdown for the GitHub Wiki (auto-synced on push)
 ├── CHANGELOG.md           # Version history
 ├── LICENSE                # Proprietary license terms

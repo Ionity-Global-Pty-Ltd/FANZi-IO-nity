@@ -38,6 +38,11 @@
   OpenRGB SDK connection being aborted mid-session. If you see this pattern,
   restarting the app resolves it; please still report it with your crash logs so
   it can be tracked for a permanent fix.
+- **Recommended:** run the app via the
+  [resilient launcher](https://github.com/Ionity-Global-Pty-Ltd/FANZi-IO-nity/tree/main/launcher)
+  instead of the exe directly — it automatically detects unexpected exits and
+  restarts the app for you (bounded, so it won't crash-loop forever), and logs
+  every event to `%APPDATA%\FANZI\launcher-logs\` for diagnosis.
 
 ## AI Thermal Intelligence seems inaccurate
 
