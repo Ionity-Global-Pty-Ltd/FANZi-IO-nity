@@ -1,0 +1,26 @@
+# OS
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Editor / IDE
+.vs/
+.vscode/
+*.suo
+*.user
+
+# Build output (if source is ever added)
+bin/
+obj/
+out/
+
+# Logs
+*.log
+
+# Local env
+.env
+.env.local
+
+# Large binaries are distributed via GitHub Releases, not committed
+*.exe
+!docs/**/*.exe
