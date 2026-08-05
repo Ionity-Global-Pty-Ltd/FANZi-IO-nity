@@ -15,7 +15,13 @@ predictive, self-tuning thermal management.
 
 ## 🌈 RGB Lighting
 
+- Powered by a bundled **OpenRGB** engine (runs as a background helper process,
+  communicating with the main app over a local SDK connection)
+- Detects motherboard AURA/RGB headers, GPU, RAM, and supported peripheral controllers
 - Synchronize RGB lighting effects with live system state (temperature, load)
+- Multiple lighting modes per device (Direct, Static, Breathing, Flashing,
+  Spectrum Cycle, Rainbow, Chase Fade, Chase, and more — availability depends on
+  the detected controller)
 - Custom lighting profiles and presets
 - Reactive effects tied to thermal or performance events
 
