@@ -4,6 +4,71 @@ All notable changes to **FANZi IO-nity** are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [4.0.0] - 2026-10-11
+
+### Overview
+RGB Studio, Overlay Studio and one live heartbeat for the whole app. Built and verified on the same rig as 3.0
+(MAXSUN MS-iCraft X870M, 2 × Patriot DDR5 RGB (ENE DRAM), ZOTAC RTX 3080 AMP Holo, ViewSonic XG270QG).
+
+### Added
+- **RGB Studio (RGB tab redesign).** Rotating rainbow hero orb, RGB-outlined cards, and buttons painted in their own colours:
+  effect chips (Static, Breathe, Rainbow, Wave, Thermal, CPU load, Performance, Strobe, Dual flash), theme pills drawn with
+  each theme's colours, 16 one-click colour swatches, R/G/B sliders in their channel colour and a Swap button.
+- **AEDi Lighting AI** (runs offline, no cloud):
+  - *Describe a mood* — type "calm ocean", "red galaxy", "fast cyberpunk party", "south africa"… and AEDi builds the effect,
+    colours, speed and brightness (27 scenes, 23 colour words, speed / brightness / static modifiers; unknown words get a stable unique palette).
+  - *Smart Ambient* — idle → calm breathing, busy → load-paced, game detected → performance, hot → temperature colours.
+  - *Thermal Guardian* (on by default) — CPU ≥ 92 °C or GPU ≥ 86 °C turns every device into a red/amber alert until it has cooled 6 °C.
+  - *Night dimming* — 22:00–06:30 brightness capped at 35 %.
+  - *AEDi suggest* — picks a theme from time of day, load, temperature and game mode.
+  - *AI colour harmony* — Complementary, Analogous, Triadic, Split and Monochrome partners for the primary colour.
+- **Deep hardware scan.** Cross-checks OpenRGB against Windows: installed DIMMs vs RGB RAM controllers, fan headers that report
+  RPM vs fan/ARGB controllers, the motherboard, GPUs, USB devices from 30 RGB vendors and the PawnIO driver — and explains every
+  gap (e.g. fan LEDs on a board OpenRGB has no driver for stay on the BIOS effect).
+- **Device cards** with type icons (RAM, GPU, Monitor, …), numbered identical sticks ("ENE DRAM · stick 1/2"), live colour strip
+  and an **Identify** button that flashes one device white.
+- **Overlay Studio.** Show/hide every overlay row (CPU / GPU gauges, CPU history, fan, CPU load, GPU load, **RAM**, **network ↓/↑**,
+  health, clock), size 80–160 %, 8 accent presets including **RGB Sync** (follows the live lighting), snap to any screen corner,
+  reset. Available in Settings and in the overlay's right-click menu.
+- **Overlay button in the title bar** (▣ Overlay, lit while the overlay is open) next to Ctrl+O and the tray menu.
+
+### Fixed
+- **Overlay reliability.** The overlay sizes itself to its content, is clamped back onto a visible screen every time it is shown
+  (unplugged monitor / resolution change), re-asserts always-on-top, and any failure is logged and shown instead of "nothing happens".
+- **Stuttering lists.** Tasks, Network and Power rebuilt their lists with Clear()+Add() on three separate timers (2 s / 2 s / 3 s),
+  so rows flashed, scroll position jumped and nothing matched the dashboard. All panels now update **in place** (keyed diff) and on
+  **one shared heartbeat** with the dashboard: data is collected in parallel with the sensor poll and applied in the same UI pass.
+- The RGB device list no longer flashes on every 15 s watchdog refresh.
+- **Upgrading while FANZi runs.** Starting v4 while an older FANZi sits in the tray used to bring the old window back. The newer
+  build now asks older instances to exit (v4+ shut down cleanly, restoring automatic fan control) and replaces them.
+
+### Changed
+- **Outlined tabs**: every tab has a rounded outline; the selected tab gets the accent-gradient outline and a soft glow.
+- Version 4.0.0 everywhere (app, installer, Inno script, READMEs, wiki). 569 unit tests + 3 render suites pass.
+
+## [3.0.0] - 2026-10-11
+
+### Overview
+RGB control now reaches every OpenRGB-supported device in the PC, including single-colour GPUs, RGB RAM and monitors.
+Verified on real hardware: ZOTAC RTX 3080 AMP Holo, two Patriot DDR5 sticks (ENE DRAM) and a ViewSonic XG270QG.
+
+### Fixed
+- **GPU and other mode changes never applied.** OpenRGB.NET 3.1.1 sends direction `0xFFFFFFFF` for modes without a direction, and OpenRGB 1.0 silently rejects those mode packets. Devices stayed in their own effect, and single-colour GPUs never changed colour. FANZi now sends mode changes itself with a correct packet (`OpenRgbModeWriter`) and reads every device back to confirm the change.
+- **Single-colour devices** with no per-LED mode, such as ZOTAC RTX 30 GPUs, are now driven through their Static mode colour, at most every 120 ms and only when the colour changes. A mode named "Static" whose colours are mode-specific is no longer mistaken for per-LED.
+- A device reporting **0 LEDs** (a RAM stick OpenRGB could not read) no longer drops the OpenRGB connection in a loop. It is listed with "No LEDs reported".
+- The in-app **update check** now uses this repository. The 140 MB download streams to a `.part` file with a size check instead of hitting a 15 s timeout, and version strings like "2.1", "v2.1.1" and "2.1.1+commit" compare correctly. A title-bar badge appears when an update is available.
+- **OpenRGB errors are visible.** LED write failures are logged and shown as "Connection lost" instead of being dropped silently. Shutdown waits at most 2 s for OpenRGB.
+
+### Added
+- FANZi runs OpenRGB with its own config folder (`%LOCALAPPDATA%\FANZI\OpenRGB\config`) with `Server → legacy_workaround` on. It also enables that flag in your own OpenRGB config, keeping a backup. A server that still refuses mode changes is restarted once automatically.
+- **Install PawnIO** button: downloads the signed PawnIO driver from github.com/namazso, verifies the signature with WinVerifyTrust and installs it silently. RAM and motherboard RGB need this driver.
+- **Conflicting RGB software** warning: SignalRGB, iCUE, Armoury Crate / Aura, MSI Center, RGB Fusion, Razer Synapse, NZXT CAM, G HUB, L-Connect, ZOTAC FireStorm / Spectra and ASRock Polychrome are detected, and a **Close them** button closes them.
+- Each device row shows how it is controlled: "Per-LED · Direct", "Single colour · Static" or "Effects only".
+- An opt-in hardware test sets every device to red, green and blue and reads the result back from OpenRGB. 527 unit tests pass.
+
+### Includes v2.2.0
+Thermal history charts, the interactive fan-curve editor, the sensor heatmap, themed alerts, animated numbers with a Reduce-motion setting, keyboard shortcuts and accessibility improvements.
+
 ## [2.1.0] - 2026
 
 ### Overview
