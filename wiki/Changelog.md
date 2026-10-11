@@ -4,7 +4,13 @@ Version history for **FANZi IO-nity**. See also the
 [Releases](https://github.com/Ionity-Global-Pty-Ltd/FANZi-IO-nity/releases) page for
 downloadable builds.
 
-## v4.0.1 (current, 2026-10-11)
+## v4.0.2 (current, 2026-10-11)
+
+- Heat colours: graphs and load bars go from LOW 0 % blue to HOT 100 % red; load-bar tips show the load by colour.
+- Orange peaks: peak marker + "▲ value" label on charts, orange live dot and "▲ NEW PEAK" on a new peak, orange 60 s peak tick on bars.
+- Tasks, Network and Power refresh every 0.5 s with in-place list updates (no stutter).
+
+## v4.0.1 (2026-10-11)
 
 - OpenRGB SDK reconnects reliably after Restart (instant port check, 60 s detection wait, orphaned OpenRGB instances stopped).
 - No more RGB frame pile-up / thread-pool starvation; device queries time out after 10 s.

@@ -4,6 +4,22 @@ All notable changes to **FANZi IO-nity** are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [4.0.2] - 2026-10-11
+
+### Changed
+- **Heat colours on graphs and load bars: LOW 0 % = blue, HOT 100 % = red.** The thermal-history charts, the overlay
+  sparkline, every load bar (CPU / GPU load, RAM, fan / pump) and the load tiles of the sensor heatmap now use one heat
+  scale: blue → royal blue → violet → crimson → red. Temperature charts map 30 °C → blue and 95 °C → red.
+- **Load bars show their value by colour.** The fill is the heat gradient up to the current value, so its tip is the
+  heat colour of the load (a 20 % bar ends blue, a 95 % bar ends red).
+- **Peaks are orange.** Each chart marks its highest sample with an orange dot, a dashed guide line and a "▲ 96°" label;
+  "max" in the header is orange. When the live value sets a **new peak**, the live dot turns orange and the header shows
+  "▲ NEW PEAK"; on load bars the fill tip flares orange and an orange tick keeps the 60 s peak visible after the value drops.
+  The heat scale has no orange in it, so a peak is never confused with a load.
+- **Tasks, Network and Power update every 0.5 s.** The panels sync on their own 0.5 s live-sync loop (was 2 s / every
+  poll / 3 s), independent of the hardware poll, and their lists are diffed in place (no Clear()+Add()), so rows move in
+  small smooth steps. The network history keeps 120 samples (60 s).
+
 ## [4.0.1] - 2026-10-11
 
 ### Fixed
