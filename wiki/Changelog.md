@@ -4,7 +4,14 @@ Version history for **FANZi IO-nity**. See also the
 [Releases](https://github.com/Ionity-Global-Pty-Ltd/FANZi-IO-nity/releases) page for
 downloadable builds.
 
-## v4.0.2 (current, 2026-10-11)
+## v4.1.0 (current, 2026-10-11)
+
+- New Tools tab: disk optimiser (analyse / optimise / defrag HDD / ReTrim SSD, optimise all), drive health (S.M.A.R.T.).
+- System repair (restore point, SFC, DISM, component clean-up, CHKDSK), network fixes and quick fixes with a live console.
+- Power & Gaming: power plans incl. Ultimate Performance, Game Mode, GPU scheduling, hibernation.
+- Thermal frame around the window, living gauge aura, real-time gliding values and scrolling charts.
+
+## v4.0.2 (2026-10-11)
 
 - Heat colours: graphs and load bars go from LOW 0 % blue to HOT 100 % red; load-bar tips show the load by colour.
 - Orange peaks: peak marker + "▲ value" label on charts, orange live dot and "▲ NEW PEAK" on a new peak, orange 60 s peak tick on bars.

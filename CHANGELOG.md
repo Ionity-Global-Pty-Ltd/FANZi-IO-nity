@@ -4,6 +4,29 @@ All notable changes to **FANZi IO-nity** are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [4.1.0] - 2026-10-11
+
+### Added
+- **Tools tab** - every button runs a real Windows tool with live output and progress in a built-in console (Cancel stops it):
+  - **Disk Optimizer (defrag & TRIM):** each drive with media type (SSD / HDD), bus, free space and model; per drive
+    Analyse (fragmentation % + Windows' advice), Optimise (TRIM on SSD, defragment on HDD), Defrag (HDD), ReTrim (SSD),
+    or Optimise all.
+  - **Drive Health (S.M.A.R.T.):** health status, temperature, wear, power-on hours, read/write errors and a verdict.
+  - **System Repair:** restore point, SFC scan & repair, DISM check / scan / restore health, component store clean-up,
+    CHKDSK online scan.
+  - **Network fixes:** flush DNS, release & renew IP, reset Winsock, reset TCP/IP, sync clock.
+  - **Quick fixes:** restart Explorer, refresh icon cache, restart audio, reset Windows Update, memory diagnostic.
+  - **Power & Gaming:** power plans, unlock Ultimate Performance, Game Mode, hardware-accelerated GPU scheduling,
+    hibernation on/off.
+- **Thermal frame:** running temperature line around the window and a title-bar temperature chip.
+- Living colour aura behind the gauges; rounded Ionity icon for app, tray and installer.
+- Sign in with Google (preview) to keep profiles in Google Drive (needs `google_oauth.json`).
+
+### Changed
+- **Real-time motion (4.0.3):** numbers, gauges and load bars glide from one real reading to the next over the measured
+  poll interval instead of jumping; history charts scroll continuously.
+- AEDi search and quick ping know the Tools tab ("defrag", "sfc", "smart"…).
+
 ## [4.0.2] - 2026-10-11
 
 ### Changed
