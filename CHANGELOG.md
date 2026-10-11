@@ -4,6 +4,25 @@ All notable changes to **FANZi IO-nity** are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [4.0.1] - 2026-10-11
+
+### Fixed
+- **OpenRGB SDK never reconnected after "Restart OpenRGB".** OpenRGB opens its SDK port only after hardware detection
+  (30 s+ with PawnIO SMBus scans), but FANZi gave up after 18 s, and its port probe waited on a thread-pool thread that
+  was busy — so it kept reporting "not listening" while the server was up. The probe now reads the Windows TCP listener
+  table (instant, no connection, no thread pool); start-up waits up to 60 s for the port; Restart stops every OpenRGB
+  instance, relaunches and reconnects.
+- **Orphaned OpenRGB instances.** A second OpenRGB left behind by an older FANZi (or one whose port bind failed) kept
+  holding the SMBus / USB devices. FANZi now stops every OpenRGB process except the one serving the SDK port.
+- **RGB frames piling up.** A new hardware frame was queued every 100 ms even while OpenRGB was slow; the queued writes
+  blocked on the service lock and starved the thread pool, which lagged the whole app. Now one frame is in flight at most,
+  a busy service drops the frame, and a device query that OpenRGB never answers is abandoned after 10 s.
+- **Laggy dashboard.** The dashboard waited for the slowest panel (process list, power) before showing new sensor
+  values. It now never waits: finished panel data is applied in the same pass, unfinished data on the next tick.
+  Polling runs on a fixed **1 s** cadence (installs on the old 3 s default are moved to 1 s; a value you chose is kept),
+  the process list refreshes every 2 s, power every 3 s, and the game-process scan every 5 s.
+- Process handles leaked by the game detector and the network panel are released every sample.
+
 ## [4.0.0] - 2026-10-11
 
 ### Overview

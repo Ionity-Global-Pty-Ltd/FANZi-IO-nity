@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  <img alt="Version" src="https://img.shields.io/badge/version-4.0.0-blue" />
+  <img alt="Version" src="https://img.shields.io/badge/version-4.0.1-blue" />
   <img alt="Platform" src="https://img.shields.io/badge/platform-Windows-0078D6?logo=windows" />
   <img alt="License" src="https://img.shields.io/badge/license-Proprietary-red" />
   <img alt="Status" src="https://img.shields.io/badge/status-active-brightgreen" />
@@ -28,7 +28,7 @@ smart fan curve automation, RGB lighting sync, and full system health monitoring
 |---|---|
 | **Product** | FANZi IO-nity |
 | **Component** | Fanzi.FanControl |
-| **Version** | 4.0.0 |
+| **Version** | 4.0.1 |
 | **Platform** | Windows 10 / 11 (x64) |
 | **Publisher** | Ionity Global (Pty) Ltd |
 | **License** | Proprietary — All Rights Reserved |
