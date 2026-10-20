@@ -4,6 +4,49 @@ All notable changes to **FANZi IO-nity** are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [4.3.1] - 2026-10-20
+
+4.3.0 re-issued with Windows, macOS and Linux in one release (the 4.3.0 release could only carry the Windows assets).
+
+### Fixed
+- **RGB RAM stops accepting colours until a reboot (ENE DDR5).** OpenRGB on AMD boards registers each ENE DRAM stick twice,
+  once per SMBus host port (PawnIO SMBus PIIX4 0 and 1) at the same address. FANZi streamed colours through both entries; two
+  host ports interleaving register writes into one ENE controller corrupt its register pointer (LED count then reads 0 / 249 /
+  257). Now exactly one entry per stick is driven (`SmbusMirrorResolver`); the other is listed as *Mirror — not driven*.
+- SMBus-attached devices receive at most one frame per 200 ms and never an unchanged frame; USB / HID devices still stream at 30 fps.
+- Control report and diagnostics explain *mirror* and *0 LEDs — layout not read yet* instead of "effects-only".
+
+### Added
+- **Re-sync RAM** (RGB tab → RAM LIGHTING): re-applies Direct mode and re-sends the colour — recovers a stuck stick without rebooting.
+  **Try SMBus port N / Auto** overrides the automatic port pick (saved in settings).
+- **Typing FX** (RGB tab): Ripple, Pulse, Line, Area, Fireworks, Typewriter, Matrix rain, Typing heat — rendered per LED at 30 fps.
+  Keyboard keys light where you hit them (OpenRGB LED names / matrix map, ANSI layout fallback); *All devices* maps the same
+  animation onto RAM, GPU, strips, mouse and monitor. FX speed, background level, live WPM, demo burst. Only key codes are polled.
+- **Bench tab** (Thermal Bench): baseline → all-core load (30 / 60 / 120 / 300 s, thread count) → cooldown at 1 Hz; 0–100 score and
+  grade from rise, ramp speed, plateau stability, fan lag and recovery (throttling penalty above 85 / 90 °C); verdict, before/after
+  comparison, temperature + fan chart, session history, CSV export. Safety stop at 95 °C.
+- Settings → Modules: Bench tab switch.
+
+## [4.2.0] - 2026-10-18 (pre-release, Windows)
+
+### Fixed
+- Your colour / effect / theme choice wins: a manual pick pauses Smart Ambient (Thermal Guardian still alerts).
+- Devices OpenRGB detects late (RAM, GPU, USB — up to ~30 s after start) and devices that first report 0 LEDs are picked up.
+- Other RGB software is detected by process *and* Windows service (SignalRGB, iCUE, Armoury Crate, MSI Center, Razer, NZXT,
+  L-Connect, Polychrome …) with **Stop & disable autostart**.
+
+### Added
+- Native hardware & driver scan: GPU board partner from the PCI subsystem ID, motherboard RGB family, kernel drivers
+  (PawnIO, WinRing0, inpoutx64, RTCore64, AsIO), SMBus host controller, USB RGB controllers, installed RGB software.
+- Dashboard HUD strip (CPU / GPU temperature and load, CPU fan, RAM, health, profiles, AEDi and RGB status on one row).
+- RGB tab decluttered into collapsible sections; Take control and the RGB switch in the header.
+
+## [4.1.1] - 2026-10-13
+
+### Added
+- Native macOS (Apple silicon, Intel) and Linux (x64, arm64) builds, packaged by CI; OpenRGB SDK endpoint (host / port, remote PCs),
+  Auto-detect, Take control with a per-device control report, Copy diagnostics.
+
 ## [4.1.0] - 2026-10-11
 
 ### Added

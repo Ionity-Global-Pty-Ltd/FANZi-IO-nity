@@ -10,8 +10,8 @@
 </p>
 
 <p align="center">
-  <img alt="Version" src="https://img.shields.io/badge/version-4.1.0-blue" />
-  <img alt="Platform" src="https://img.shields.io/badge/platform-Windows-0078D6?logo=windows" />
+  <img alt="Version" src="https://img.shields.io/badge/version-4.3.1-blue" />
+  <img alt="Platform" src="https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-0078D6" />
   <img alt="License" src="https://img.shields.io/badge/license-Proprietary-red" />
   <img alt="Status" src="https://img.shields.io/badge/status-active-brightgreen" />
 </p>
@@ -20,7 +20,7 @@
 
 ## About
 
-**FANZi IO-nity** (internally `Fanzi.FanControl`) is a Windows desktop application by
+**FANZi IO-nity** (internally `Fanzi.FanControl`) is a desktop application (Windows, macOS, Linux) by
 **Ionity Global (Pty) Ltd** that brings AI-driven thermal intelligence to your PC — combining
 smart fan curve automation, RGB lighting sync, and full system health monitoring in one app.
 
@@ -28,8 +28,8 @@ smart fan curve automation, RGB lighting sync, and full system health monitoring
 |---|---|
 | **Product** | FANZi IO-nity |
 | **Component** | Fanzi.FanControl |
-| **Version** | 4.1.0 |
-| **Platform** | Windows 10 / 11 (x64) |
+| **Version** | 4.3.1 |
+| **Platform** | Windows 10 / 11 (x64) · macOS 12+ (Apple silicon, Intel) · Linux (x64, arm64) |
 | **Publisher** | Ionity Global (Pty) Ltd |
 | **License** | Proprietary — All Rights Reserved |
 | **Copyright** | © 2018–2026 Ionity Global (Pty) Ltd. All Rights Reserved. |
@@ -43,11 +43,23 @@ smart fan curve automation, RGB lighting sync, and full system health monitoring
 - 📊 **System Health Monitoring** — live CPU, GPU, motherboard and storage telemetry
 - ⚙️ Powered by the **AEDi AI Engine** by Johan Wilhelm van Antwerp (Antwerp Designs — [www.ionity.today](https://www.ionity.today))
 
+### New in 4.3.1
+
+- **RAM lighting fixed.** OpenRGB on AMD boards lists each ENE DRAM stick on *two* SMBus host ports; writing through
+  both corrupted the controller until a power-cycle. 4.3 drives one entry per stick, rate-limits SMBus writes and adds
+  **Re-sync RAM** plus an SMBus port override to the RGB tab.
+- **Typing FX** — keystrokes become light: Ripple, Pulse, Line, Area, Fireworks, Typewriter, Matrix rain, Typing heat,
+  on the keyboard where you hit the key and across RAM, GPU, strips and mouse. Only key codes are polled; nothing is logged.
+- **Bench tab** — a repeatable all-core cooling benchmark with a 0–100 score, verdict, before/after comparison and CSV export.
+- Windows installer + portable, macOS .dmg / .zip and Linux AppImage / .deb / .tar.gz in one release.
+
 ## Installation
 
 1. Go to the [Releases](../../releases) page.
-2. Download the latest `Fanzi.FanControl.exe` asset.
-3. Run the installer/executable on a Windows 10/11 (x64) machine.
+2. Windows: download `FANZi-IO-nity-v4.3.1-Installer-win-x64.zip` (run `FANZI-Installer.exe` as Administrator) or the portable `.exe`.
+   macOS: `-macOS-arm64.dmg` (Apple silicon) / `-macOS-x64.dmg` (Intel) — right-click → Open the first time (not notarised yet).
+   Linux: `-x86_64.AppImage`, `-amd64.deb` / `-arm64.deb` or the `.tar.gz`.
+3. Verify against `SHA256SUMS.txt`.
 
 > See the [Wiki → Installation](../../wiki/Installation) page for full setup instructions,
 > requirements, and troubleshooting steps.

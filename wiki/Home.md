@@ -22,7 +22,7 @@ System Health Monitoring — powered by the AEDi (Antwerp Ecosystem Designs Ioni
 |---|---|
 | **Product** | FANZi IO-nity |
 | **Component** | Fanzi.FanControl |
-| **Current version** | 4.1.0 |
+| **Current version** | 4.3.1 |
 | **Platform** | Windows 10 / 11 (x64) |
 | **Publisher** | Ionity Global (Pty) Ltd |
 | **License** | Proprietary — All Rights Reserved |

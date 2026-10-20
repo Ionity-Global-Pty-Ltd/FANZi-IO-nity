@@ -4,7 +4,25 @@ Version history for **FANZi IO-nity**. See also the
 [Releases](https://github.com/Ionity-Global-Pty-Ltd/FANZi-IO-nity/releases) page for
 downloadable builds.
 
-## v4.1.0 (current, 2026-10-11)
+## v4.3.1 (current, 2026-10-20)
+
+- RAM lighting fixed: ENE DRAM listed on two SMBus host ports is driven once (the double write corrupted the controller until a
+  power-cycle); SMBus writes rate-limited; **Re-sync RAM** and SMBus port override in the RGB tab.
+- Typing FX: Ripple, Pulse, Line, Area, Fireworks, Typewriter, Matrix rain, Typing heat — keyboard + every RGB device.
+- Bench tab: repeatable all-core cooling benchmark, 0–100 score, verdict, compare, history, CSV export.
+- Windows, macOS and Linux packages in one release.
+
+## v4.2.0 (pre-release, 2026-10-18)
+
+- Manual colour / effect choice pauses Smart Ambient; late-detected devices picked up; RGB software + service detection.
+- Native hardware & driver scan; dashboard HUD; RGB tab sections.
+
+## v4.1.1 (2026-10-13)
+
+- Native macOS and Linux builds; OpenRGB SDK endpoint settings; Take control; Copy diagnostics.
+
+## v4.1.0 (2026-10-11)
+
 
 - New Tools tab: disk optimiser (analyse / optimise / defrag HDD / ReTrim SSD, optimise all), drive health (S.M.A.R.T.).
 - System repair (restore point, SFC, DISM, component clean-up, CHKDSK), network fixes and quick fixes with a live console.
