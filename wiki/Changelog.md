@@ -4,7 +4,11 @@ Version history for **FANZi IO-nity**. See also the
 [Releases](https://github.com/Ionity-Global-Pty-Ltd/FANZi-IO-nity/releases) page for
 downloadable builds.
 
-## v4.3.1 (current, 2026-10-20)
+## v4.3.2 (current, 2026-10-20)
+
+- RAM mirrors: all sticks driven through one SMBus host port per adapter.
+
+## v4.3.1 (2026-10-20)
 
 - RAM lighting fixed: ENE DRAM listed on two SMBus host ports is driven once (the double write corrupted the controller until a
   power-cycle); SMBus writes rate-limited; **Re-sync RAM** and SMBus port override in the RGB tab.

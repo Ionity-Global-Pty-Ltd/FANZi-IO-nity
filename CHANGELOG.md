@@ -4,6 +4,12 @@ All notable changes to **FANZi IO-nity** are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [4.3.2] - 2026-10-20
+
+### Fixed
+- RAM mirrors: every stick is driven through **one** SMBus host port per adapter (the two PIIX4 ports share the bus wires and
+  OpenRGB serialises per port), never split across ports.
+
 ## [4.3.1] - 2026-10-20
 
 4.3.0 re-issued with Windows, macOS and Linux in one release (the 4.3.0 release could only carry the Windows assets).
