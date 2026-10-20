@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  <img alt="Version" src="https://img.shields.io/badge/version-4.3.2-blue" />
+  <img alt="Version" src="https://img.shields.io/badge/version-4.3.3-blue" />
   <img alt="Platform" src="https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-0078D6" />
   <img alt="License" src="https://img.shields.io/badge/license-Proprietary-red" />
   <img alt="Status" src="https://img.shields.io/badge/status-active-brightgreen" />
@@ -28,7 +28,7 @@ smart fan curve automation, RGB lighting sync, and full system health monitoring
 |---|---|
 | **Product** | FANZi IO-nity |
 | **Component** | Fanzi.FanControl |
-| **Version** | 4.3.2 |
+| **Version** | 4.3.3 |
 | **Platform** | Windows 10 / 11 (x64) · macOS 12+ (Apple silicon, Intel) · Linux (x64, arm64) |
 | **Publisher** | Ionity Global (Pty) Ltd |
 | **License** | Proprietary — All Rights Reserved |
@@ -43,8 +43,13 @@ smart fan curve automation, RGB lighting sync, and full system health monitoring
 - 📊 **System Health Monitoring** — live CPU, GPU, motherboard and storage telemetry
 - ⚙️ Powered by the **AEDi AI Engine** by Johan Wilhelm van Antwerp (Antwerp Designs — [www.ionity.today](https://www.ionity.today))
 
-### New in 4.3.2
+### New in 4.3.3
 
+- **RAM drives through SMBus port 0.** When both PIIX4 ports read the sticks correctly, FANZi now picks port 0 - the port a
+  clean OpenRGB detection registers the DIMM controllers on. 4.3.2 picked port 1, which did not reach Patriot DDR5 RGB in
+  A2 / B2 (ENE 0x71 / 0x73) on the MAXSUN X870M. Sticks still frozen after an older version: shut down, PSU off 30 s, start again.
+
+### New in 4.3.2
 - **RAM lighting fixed.** OpenRGB on AMD boards lists each ENE DRAM stick on *two* SMBus host ports; writing through
   both corrupted the controller until a power-cycle. 4.3 drives one entry per stick, rate-limits SMBus writes and adds
   **Re-sync RAM** plus an SMBus port override to the RGB tab.
@@ -56,7 +61,7 @@ smart fan curve automation, RGB lighting sync, and full system health monitoring
 ## Installation
 
 1. Go to the [Releases](../../releases) page.
-2. Windows: download `FANZi-IO-nity-v4.3.2-Installer-win-x64.zip` (run `FANZI-Installer.exe` as Administrator) or the portable `.exe`.
+2. Windows: download `FANZi-IO-nity-v4.3.3-Installer-win-x64.zip` (run `FANZI-Installer.exe` as Administrator) or the portable `.exe`.
    macOS: `-macOS-arm64.dmg` (Apple silicon) / `-macOS-x64.dmg` (Intel) — right-click → Open the first time (not notarised yet).
    Linux: `-x86_64.AppImage`, `-amd64.deb` / `-arm64.deb` or the `.tar.gz`.
 3. Verify against `SHA256SUMS.txt`.

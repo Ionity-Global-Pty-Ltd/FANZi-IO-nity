@@ -4,6 +4,16 @@ All notable changes to **FANZi IO-nity** are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [4.3.3] - 2026-10-20
+
+### Fixed
+- RAM: when both SMBus host ports read plausible LED counts, drive the sticks through the **lowest** port (0) instead of the
+  highest. A clean OpenRGB detection on AMD FCH (1022:790B) registers the DIMM controllers on port 0 only; the port 1 copies
+  did not reach the sticks (Patriot DDR5 RGB in A2 / B2, ENE 0x71 / 0x73, MAXSUN MS-iCraft X870M).
+
+### Changed
+- Portable README and release notes: power-cycle guidance for ENE controllers locked by older versions.
+
 ## [4.3.2] - 2026-10-20
 
 ### Fixed
