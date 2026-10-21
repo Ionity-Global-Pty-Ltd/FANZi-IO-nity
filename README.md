@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  <img alt="Version" src="https://img.shields.io/badge/version-4.3.3-blue" />
+  <img alt="Version" src="https://img.shields.io/badge/version-4.4.0-blue" />
   <img alt="Platform" src="https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-0078D6" />
   <img alt="License" src="https://img.shields.io/badge/license-Proprietary-red" />
   <img alt="Status" src="https://img.shields.io/badge/status-active-brightgreen" />
@@ -28,7 +28,7 @@ smart fan curve automation, RGB lighting sync, and full system health monitoring
 |---|---|
 | **Product** | FANZi IO-nity |
 | **Component** | Fanzi.FanControl |
-| **Version** | 4.3.3 |
+| **Version** | 4.4.0 |
 | **Platform** | Windows 10 / 11 (x64) · macOS 12+ (Apple silicon, Intel) · Linux (x64, arm64) |
 | **Publisher** | Ionity Global (Pty) Ltd |
 | **License** | Proprietary — All Rights Reserved |
@@ -43,8 +43,18 @@ smart fan curve automation, RGB lighting sync, and full system health monitoring
 - 📊 **System Health Monitoring** — live CPU, GPU, motherboard and storage telemetry
 - ⚙️ Powered by the **AEDi AI Engine** by Johan Wilhelm van Antwerp (Antwerp Designs — [www.ionity.today](https://www.ionity.today))
 
-### New in 4.3.3
+### New in 4.4.0
 
+- **AEDi Cooling Fingerprint (new AI).** Learns the cooler's thermal resistance (°C per CPU watt, per fan-speed band, ambient
+  independent) from normal use, tracks how it ages and forecasts *"clean the cooling in ~N days"*. Fans that spin ≥ 15 % slower
+  at the same duty are flagged for bearing wear or a blockage. Local only (`%APPDATA%\FANZI\ai`).
+- **AEDi Self-Doctor (auto-debugging).** Every 30 s FANZi checks sensors, fans, the RGB link, the MAXSUN Sync service, memory,
+  responsiveness and its error log, repairs what it safely can, and saves a redacted diagnostics bundle on error storms.
+- **RAM through MAXSUN Sync** (ENE HAL) on MAXSUN boards - OpenRGB keeps off the DRAM SMBus controllers.
+- **Use BIOS fan settings** (default on): motherboard headers follow the BIOS Smart Fan curve.
+- **Installer upgrades in place**: closes the running FANZi, keeps folder, settings, profiles and AEDi data.
+
+### New in 4.3.3
 - **RAM drives through SMBus port 0.** When both PIIX4 ports read the sticks correctly, FANZi now picks port 0 - the port a
   clean OpenRGB detection registers the DIMM controllers on. 4.3.2 picked port 1, which did not reach Patriot DDR5 RGB in
   A2 / B2 (ENE 0x71 / 0x73) on the MAXSUN X870M. Sticks still frozen after an older version: shut down, PSU off 30 s, start again.
@@ -61,7 +71,7 @@ smart fan curve automation, RGB lighting sync, and full system health monitoring
 ## Installation
 
 1. Go to the [Releases](../../releases) page.
-2. Windows: download `FANZi-IO-nity-v4.3.3-Installer-win-x64.zip` (run `FANZI-Installer.exe` as Administrator) or the portable `.exe`.
+2. Windows: download `FANZi-IO-nity-v4.4.0-Installer-win-x64.zip` (run `FANZI-Installer.exe` as Administrator - it upgrades an existing install in place) or the portable `.exe`.
    macOS: `-macOS-arm64.dmg` (Apple silicon) / `-macOS-x64.dmg` (Intel) — right-click → Open the first time (not notarised yet).
    Linux: `-x86_64.AppImage`, `-amd64.deb` / `-arm64.deb` or the `.tar.gz`.
 3. Verify against `SHA256SUMS.txt`.

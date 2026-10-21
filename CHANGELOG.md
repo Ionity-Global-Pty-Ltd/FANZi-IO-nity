@@ -4,6 +4,21 @@ All notable changes to **FANZi IO-nity** are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [4.4.0] - 2026-10-21
+
+### Added
+- AEDi Cooling Fingerprint: per-machine thermal-resistance model (T = T0 + R*P per CPU-fan band), daily trend, cleaning
+  forecast, fan RPM-per-duty wear detection; dashboard card; Re-learn.
+- AEDi Self-Doctor: 30 s self-checks with auto-repair (sensor driver reopen, RGB reconnect, MaxsunSyncService restart, memory
+  compaction), UI-hang and error-storm detection, diagnostics bundle (redacted) to Documents\FANZi\Diagnostics.
+- RAM and MAXSUN board LEDs through MaxsunSyncService (ENE HAL) when MAXSUN Sync is installed.
+- Fans tab: Use BIOS fan settings (default on) for motherboard headers.
+
+### Changed
+- Installer: detects the installed FANZi (registry InstallLocation), upgrades in place, closes a running FANZi gracefully,
+  replaces locked files safely, keeps the start-with-Windows choice.
+- OpenRGB no longer writes ENE DRAM controllers while MAXSUN Sync owns them.
+
 ## [4.3.3] - 2026-10-20
 
 ### Fixed
